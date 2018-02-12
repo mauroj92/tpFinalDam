@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.example.maurojuarez.tpfinaldam.AltaPlatos"
+android:padding="10dp" >
+
+<TextView
+    android:id="@+id/tvTipoPlato"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Tipo de plato" />
+<Spinner
+    android:layout_below="@id/tvTipoPlato"
+    android:id="@+id/spTipo"
+    android:layout_width="match_parent"
+    android:layout_height="38dp"></Spinner>
+
+<TextView
+    android:id="@+id/tvOferta"
+    android:layout_below="@id/spTipo"
+    android:layout_marginTop="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="text"
+    android:text="Nombre del plato:" />
+<EditText
+    android:layout_below="@id/tvOferta"
+    android:id="@+id/etNombrePlato"
+    android:inputType="text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:imeOptions="actionDone"
+    android:maxLines="1"/>
+
+<TextView
+    android:id="@+id/tvDescripcion"
+    android:layout_below="@id/etNombrePlato"
+    android:layout_marginTop="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Descripcino del producto" />
+
+<EditText
+    android:id="@+id/etDescripcion"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="text"
+    android:imeOptions="actionDone"
+    android:maxLines="1"
+    android:layout_below="@+id/tvDescripcion"
+    android:layout_alignParentStart="true" />
+
+<TextView
+    android:id="@+id/tvPrecio"
+    android:layout_below="@id/etDescripcion"
+    android:layout_marginTop="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Precio del unitario del plato: " />
+<EditText
+    android:id="@+id/etPrecio"
+    android:layout_below="@id/tvPrecio"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="number"
+    android:imeOptions="actionDone"
+    android:maxLines="1"/>
+
+
+<LinearLayout
+    android:layout_below="@id/etPrecio"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_weight="0.5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="GUARDAR" />
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_weight="0.5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="CANCELAR" />
+</LinearLayout>
+
+</RelativeLayout>

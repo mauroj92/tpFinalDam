@@ -12,15 +12,18 @@ import java.util.Date;
 public class Plato implements Parcelable {
     private Integer id;
     private String nombre;
-    private String descripcion;
+    private String detalle;
     private Integer tipo;
     private Double precio;
 
-    public Plato(Integer id, String nombre, String descripcion, Integer tipo, Double precio) {
+    public Plato(){
+
+    }
+
+    public Plato(Integer id, String nombre, String detalle, Integer tipo, Double precio) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
-
+        this.detalle = detalle;
         this.tipo = tipo;
         this.precio = precio;
     }
@@ -28,10 +31,22 @@ public class Plato implements Parcelable {
     public Plato(Parcel in){
         id = in.readInt();
         nombre = in.readString();
-        descripcion = in.readString();
+        detalle = in.readString();
         tipo = in.readInt();
         precio = in.readDouble();
     }
+
+    public static final Creator<Plato> CREATOR = new Creator<Plato>() {
+        @Override
+        public Plato createFromParcel(Parcel in) {
+            return new Plato(in);
+        }
+
+        @Override
+        public Plato[] newArray(int size) {
+            return new Plato[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -42,7 +57,7 @@ public class Plato implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeString(nombre);
-        parcel.writeString(descripcion);
+        parcel.writeString(detalle);
         parcel.writeInt(tipo);
         parcel.writeDouble(precio);
 
@@ -53,8 +68,7 @@ public class Plato implements Parcelable {
         return "Plato{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-
+                ", detalle='" + detalle + '\'' +
                 ", tipo=" + tipo +
                 ", precio=" + precio +
                 '}';
@@ -68,8 +82,8 @@ public class Plato implements Parcelable {
         this.nombre = nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
 
@@ -89,8 +103,8 @@ public class Plato implements Parcelable {
         return nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDetalle() {
+        return detalle;
     }
 
 

@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.maurojuarez.tpfinaldam.ListaPlatos">
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="10dp"
+android:descendantFocusability="blocksDescendants">
 
-</android.support.constraint.ConstraintLayout>
+<TextView
+    android:id="@+id/tvNombre"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:text="DESAROLLO DE AM"
+    android:textSize="16sp"
+    android:textStyle="bold" />
+<TextView
+    android:id="@+id/tvCategoria"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Desarollador"
+    android:textStyle="italic"
+    android:layout_alignBottom="@+id/btnMenos"
+    android:layout_alignParentStart="true" />
+
+
+<TextView
+    android:id="@+id/tvHora"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Detalles"
+    android:layout_below="@+id/btnMas"
+    android:layout_alignParentStart="true" />
+    <TextView
+        android:id="@+id/tvCantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad: X"
+        android:layout_alignBaseline="@+id/tvCategoria"
+        android:layout_alignBottom="@+id/tvCategoria"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnMas"
+        android:background="@drawable/roundedbutton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="+"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="29dp" />
+    <Button
+        android:id="@+id/btnMenos"
+        android:background="@drawable/roundedbutton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:text="-"
+        android:layout_below="@+id/btnMas"
+        android:layout_alignStart="@+id/btnMas"
+        android:layout_marginTop="10dp" />
+
+
+</RelativeLayout>
