@@ -1,18 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.maurojuarez.tpfinaldam.MainActivity">
+    tools:context="com.example.maurojuarez.tpfinaldam.MainActivity"
+    android:padding="20dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textAlignment="center"
+        android:text="ACÁ LOGO"
+        android:textSize="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/etxCodigoAcceso"
+        android:hint="Código de  acceso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="SOY ADMIN"
+        android:id="@+id/btnAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="SOY COMENSAL"
+        android:id="@+id/btnComensal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
