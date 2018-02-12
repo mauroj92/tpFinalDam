@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AltaPlatos" />
+        <activity android:name=".ListaPedidos" />
+        <activity android:name=".ListaPlatos"></activity>
     </application>
 
 </manifest>
