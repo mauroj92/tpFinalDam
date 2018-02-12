@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnComensal = (Button) findViewById(R.id.btnComensal);
 
         btnAdmin.setOnClickListener(this);
+        btnComensal.setOnClickListener(this);
     }
 
     @Override
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 comprobarCodigoAcceso();
                 break;
             case R.id.btnComensal:
-                Intent intent = new Intent(this, ListaPlatos.class);
-                startActivity(intent);
+                Intent intentPlatos = new Intent(this, ListaPlatos.class);
+                startActivity(intentPlatos);
                 break;
         }
     }
@@ -44,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /* Comprobar que la persona que intenta ingresar sepa el código de acceso */
     public void comprobarCodigoAcceso(){
         if (etxCodigoAcceso.getText().toString().equals(CODIGO_ACCESO)){
-            Intent intent = new Intent(this, ListaPedidos.class);
-            startActivity(intent);
+            Intent intentPedidos = new Intent(this, ListaPedidos.class);
+            startActivity(intentPedidos);
         }
         else {
             etxCodigoAcceso.setText("");

@@ -13,6 +13,8 @@ public class Pedido implements Parcelable{
     private Integer id;
     private String nombre;
     private String dni;
+    private Integer mesa;
+    private String hora;
     private List<Integer> platos; //lita con ids
 
     public Pedido(Integer id, String nombre, String dni, List<Integer> platos) {
@@ -90,6 +92,22 @@ public class Pedido implements Parcelable{
 
     public void setPlatos(List<Integer> platos) {
         this.platos = platos;
+    }
+
+    public Integer getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Integer mesa) {
+        this.mesa = mesa;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     @Override

@@ -29,6 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:layout_marginTop="30dp"
+        android:text="Seleccione la mesa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Spinner>
     <Button
         android:text="SOY COMENSAL"
         android:id="@+id/btnComensal"
