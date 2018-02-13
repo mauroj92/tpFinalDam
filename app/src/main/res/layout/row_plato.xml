@@ -17,7 +17,7 @@ android:descendantFocusability="blocksDescendants">
     android:textSize="16sp"
     android:textStyle="bold" />
 <TextView
-    android:id="@+id/tvCategoria"
+    android:id="@+id/tvPrecio"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Desarollador"
@@ -27,7 +27,7 @@ android:descendantFocusability="blocksDescendants">
 
 
 <TextView
-    android:id="@+id/tvHora"
+    android:id="@+id/tvDetalle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Detalles"
@@ -38,8 +38,8 @@ android:descendantFocusability="blocksDescendants">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cantidad: X"
-        android:layout_alignBaseline="@+id/tvCategoria"
-        android:layout_alignBottom="@+id/tvCategoria"
+        android:layout_alignBaseline="@id/tvPrecio"
+        android:layout_alignBottom="@id/tvPrecio"
         android:layout_centerHorizontal="true" />
 
     <Button

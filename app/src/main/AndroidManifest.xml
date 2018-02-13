@@ -19,6 +19,10 @@
         <activity android:name=".AltaPlatos" />
         <activity android:name=".ListaPedidos" />
         <activity android:name=".ListaPlatos" />
+        <activity
+            android:name=".ActividadTab.ListaPlatosTabs"
+            android:label="@string/title_activity_lista_platos_tabs"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

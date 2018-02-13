@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.maurojuarez.tpfinaldam.ActividadTab.ListaPlatosTabs;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnAdmin, btnComensal;
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 comprobarCodigoAcceso();
                 break;
             case R.id.btnComensal:
-                Intent intentPlatos = new Intent(this, ListaPlatos.class);
+                Intent intentPlatos = new Intent(this, ListaPlatosTabs.class);
                 startActivity(intentPlatos);
                 break;
         }

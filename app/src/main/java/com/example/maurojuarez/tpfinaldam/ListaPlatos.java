@@ -2,7 +2,6 @@ package com.example.maurojuarez.tpfinaldam;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.maurojuarez.tpfinaldam.modelo.FirebaseReferences;
 import com.example.maurojuarez.tpfinaldam.modelo.Plato;
@@ -22,7 +21,7 @@ public class ListaPlatos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_platos);
+        setContentView(R.layout.row_plato);
 
         //declarar adapter
 
