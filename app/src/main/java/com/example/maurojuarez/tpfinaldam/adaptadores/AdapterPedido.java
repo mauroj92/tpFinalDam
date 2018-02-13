@@ -50,7 +50,7 @@ public class AdapterPedido extends ArrayAdapter<Pedido> {
         holder.mesa.setText(this.getItem(position).getMesa().toString());
         holder.hora.setText(this.getItem(position).getHora());
 
-        return super.getView(position, convertView, parent);
+        return row ;
     }
 
     class ViewHolder {

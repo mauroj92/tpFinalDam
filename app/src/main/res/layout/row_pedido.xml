@@ -5,16 +5,19 @@
     android:padding="10dp">
 
     <TextView
+        android:textColor="#000"
         android:id="@+id/txvNombrePedido"
         android:text="Nombre y Apellido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:textColor="#000"
         android:id="@+id/txvMesaPedido"
         android:text="MESA 4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
+        android:textColor="#000"
         android:id="@+id/txvHoraPedido"
         android:text="HORA"
         android:layout_width="match_parent"

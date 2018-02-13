@@ -17,6 +17,10 @@ public class Pedido implements Parcelable{
     private String hora;
     private List<Integer> platos; //lita con ids
 
+
+    public Pedido() {
+    }
+
     public Pedido(Integer id, String nombre, String dni, List<Integer> platos) {
         this.id = id;
         this.nombre = nombre;

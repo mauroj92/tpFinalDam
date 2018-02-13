@@ -32,12 +32,12 @@ public class ListaPlatos extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot snapShot: dataSnapshot.getChildren()) {
+                for (DataSnapshot snapShot : dataSnapshot.getChildren()) {
                     Plato unPlato = snapShot.getValue(Plato.class);
                     listaPlatos.add(unPlato);
                 }
 
-                adapter.notifyDataSetChanged();
+            //adapter.notifyDataSetChanged();
             }
 
             @Override
