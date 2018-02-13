@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.maurojuarez.tpfinaldam">
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,11 +18,11 @@
         </activity>
         <activity android:name=".AltaPlatos" />
         <activity android:name=".ListaPedidos" />
-        <activity android:name=".ListaPlatos" />
         <activity
             android:name=".ActividadTab.ListaPlatosTabs"
             android:label="@string/title_activity_lista_platos_tabs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AltaPedido"></activity>
     </application>
 
 </manifest>
