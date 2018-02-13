@@ -47,6 +47,7 @@ public class AdapterPlatos extends ArrayAdapter<Plato> {
 
         if (holder == null) {
             holder = new ViewHolder(row);
+
             row.setTag(holder);
 
             Button.OnClickListener onClickListener_mas = new Button.OnClickListener(){
