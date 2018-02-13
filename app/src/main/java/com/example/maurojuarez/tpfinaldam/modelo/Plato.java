@@ -15,6 +15,7 @@ public class Plato implements Parcelable {
     private String detalle;
     private Integer tipo;
     private Double precio;
+    private Integer cantidad;
 
     public Plato(){
 
@@ -114,5 +115,13 @@ public class Plato implements Parcelable {
 
     public Double getPrecio() {
         return precio;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 }
