@@ -1,65 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="10dp"
-android:descendantFocusability="blocksDescendants">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
 
-<TextView
-    android:id="@+id/tvNombre"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:text="DESAROLLO DE AM"
-    android:textSize="16sp"
-    android:textStyle="bold" />
-<TextView
-    android:id="@+id/tvPrecio"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Desarollador"
-    android:textStyle="italic"
-    android:layout_alignBottom="@+id/btnMenos"
-    android:layout_alignParentStart="true" />
+    <LinearLayout
+        android:paddingLeft="8dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btnMas"
+            android:background="@drawable/roundedbutton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:text="+"
+            android:textSize="30dp" />
+        <Button
+            android:id="@+id/btnMenos"
+            android:background="@drawable/roundedbutton"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:textSize="40dp"
+            android:text="-"
+            android:layout_marginTop="10dp" />
 
-<TextView
-    android:id="@+id/tvDetalle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Detalles"
-    android:layout_below="@+id/btnMas"
-    android:layout_alignParentStart="true" />
-    <TextView
-        android:id="@+id/tvCantidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cantidad: 0"
-        android:layout_alignBaseline="@id/tvPrecio"
-        android:layout_alignBottom="@id/tvPrecio"
-        android:layout_centerHorizontal="true" />
+    </LinearLayout>
+    <LinearLayout
+        android:paddingLeft="5dp"
+        android:layout_weight="5"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnMas"
-        android:background="@drawable/roundedbutton"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:text="+"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="29dp" />
-    <Button
-        android:id="@+id/btnMenos"
-        android:background="@drawable/roundedbutton"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:text="-"
-        android:layout_below="@+id/btnMas"
-        android:layout_alignStart="@+id/btnMas"
-        android:layout_marginTop="10dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+            <TextView
+                android:layout_marginTop="5dp"
+                android:textColor="#000"
+                android:id="@+id/tvNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DESAROLLO DE AM"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:textColor="#555"
+                android:id="@+id/tvDetalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detalles" />
+        </LinearLayout>
 
 
-</RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:textColor="#ea0"
+                android:id="@+id/tvCantidad"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="12" />
+            <TextView
+                android:textColor="#8c2"
+                android:id="@+id/tvPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 123,00"
+                android:textSize="20dp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
