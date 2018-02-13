@@ -5,14 +5,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.maurojuarez.tpfinaldam.R;
-import com.example.maurojuarez.tpfinaldam.adaptadores.AdapterPlatos;
+import com.example.maurojuarez.tpfinaldam.adaptadores.AdapterPostres;
+import com.example.maurojuarez.tpfinaldam.modelo.FirebaseReferences;
 import com.example.maurojuarez.tpfinaldam.modelo.Plato;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +32,8 @@ public class TabPostres extends Fragment {
     private static final String TAG = "TabPlatosFragment";
     private List<Plato> listaPostres;
     private ListView listViewPostres;
-    private AdapterPlatos adaptardorPostres;
+    private AdapterPostres adaptardorPostres;
+    private DatabaseReference refPlatos;
 
     @Nullable
     @Override
@@ -36,9 +44,29 @@ public class TabPostres extends Fragment {
         listaPostres = new ArrayList<>();
 
         listViewPostres = (ListView) view.findViewById(R.id.listaPostres);
-//        adaptardorPostres = new AdapterPlatos(this, listaPostres);
 
+        adaptardorPostres = new AdapterPostres(getActivity().getApplicationContext(), listaPostres);
+        listViewPostres.setAdapter(adaptardorPostres);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        refPlatos = database.getReference(FirebaseReferences.PLATOS_REFERENCE);// busco la ref de la base de datos
+        refPlatos.orderByChild("tipo").equalTo(3).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
+                for (DataSnapshot snapShot : dataSnapshot.getChildren()) {
+                    Plato unPlato = snapShot.getValue(Plato.class);
+                    Log.d("datos_postre" , unPlato.toString());
+                    listaPostres.add(unPlato);
+                }
+
+                adaptardorPostres.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         return view;
     }

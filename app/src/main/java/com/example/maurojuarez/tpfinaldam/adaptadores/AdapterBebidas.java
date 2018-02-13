@@ -10,9 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.maurojuarez.tpfinaldam.ActividadTab.TabPostres;
 import com.example.maurojuarez.tpfinaldam.R;
-import com.example.maurojuarez.tpfinaldam.modelo.Pedido;
 import com.example.maurojuarez.tpfinaldam.modelo.Plato;
 
 import java.util.List;
@@ -21,12 +19,12 @@ import java.util.List;
  * Created by Nicolas on 13/2/2018.
  */
 
-public class AdapterPlatos extends ArrayAdapter<Plato> {
+public class AdapterBebidas extends ArrayAdapter<Plato> {
     LayoutInflater inflater;
     List<Plato> platos;
 
 
-    public AdapterPlatos(@NonNull Context context, List<Plato> platos) {
+    public AdapterBebidas(@NonNull Context context, List<Plato> platos) {
         super(context, R.layout.row_plato, platos);
         inflater = LayoutInflater.from(context);
         this.platos = platos;

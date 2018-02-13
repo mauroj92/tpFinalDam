@@ -54,7 +54,7 @@ public class TabPlatos extends Fragment {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         refPlatos = database.getReference(FirebaseReferences.PLATOS_REFERENCE);// busco la ref de la base de datos
-        refPlatos.addValueEventListener(new ValueEventListener() {
+        refPlatos.orderByChild("tipo").equalTo(1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
