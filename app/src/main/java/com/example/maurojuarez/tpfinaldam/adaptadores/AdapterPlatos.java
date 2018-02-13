@@ -42,15 +42,40 @@ public class AdapterPlatos extends ArrayAdapter<Plato> {
         }
 
         ViewHolder holder = (ViewHolder) row.getTag();
+        final ViewHolder finalHolder = holder;
 
         if (holder == null) {
             holder = new ViewHolder(row);
             row.setTag(holder);
+
+            final View.OnClickListener onClickListener_mas = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String string =  finalHolder.cantidad.getText().toString();
+                    String[] parts = string.split(":");
+                    Integer cantidad = Integer.valueOf(parts[1]);
+                    cantidad++;
+                    finalHolder.cantidad.setText("Cantidad: " + String.valueOf(cantidad));
+                }
+            };
+
+            final View.OnClickListener onClickListener_menos = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String string = finalHolder.cantidad.getText().toString();
+                    String[] parts = string.split(":");
+                    Integer cantidad = Integer.valueOf(parts[1]);
+                    cantidad--;
+                    finalHolder.cantidad.setText("Cantidad: " + String.valueOf(cantidad));
+                }
+            };
+            holder.btnMenos.setOnClickListener(onClickListener_menos);
+            holder.btnMas.setOnClickListener(onClickListener_mas);
         }
 
         holder.nombre.setText(this.getItem(position).getNombre());
-        holder.cantidad.setText("$0");
-        holder.precio.setText(this.getItem(position).getPrecio().toString());
+        holder.cantidad.setText(holder.cantidad.getText().toString());
+        holder.precio.setText("$: " + this.getItem(position).getPrecio().toString());
         holder.detalles.setText(this.getItem(position).getDetalle());
 
         return row ;
