@@ -53,6 +53,7 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
     private String idFirebase;
 
     private Intent intentOrigen;
+
     Calendar calendar = Calendar.getInstance(Locale.getDefault());
 
     @Override
@@ -67,12 +68,14 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
         btnReproducir = (Button) findViewById(R.id.btnReproducir);
         etNombre = (EditText) findViewById(R.id.etNombre);
         etDni = (EditText) findViewById(R.id.etDni);
+        btnGuardar.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
         btnGrabar.setOnClickListener(this);
         btnReproducir.setOnClickListener(this);
         btnReproducir.setEnabled(false);//siempre comienza en falso
 
         intentOrigen = getIntent();
-//        intentOrigen.removeExtra();  ACA LEER LA LISTA DE PLATOS Y METERLA EN EL PEDIDO
+//        intentOrigen.();  ACA LEER LA LISTA DE PLATOS Y METERLA EN EL PEDIDO
 
         mStorage = FirebaseStorage.getInstance().getReference();
 
@@ -115,7 +118,7 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.btnGuardar:
-                fichero.delete();//borro siempre el audio
+
 
                 Date currentTime = Calendar.getInstance().getTime();
                 int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -128,7 +131,7 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
                 Integer mesa = 10;
                 idFirebase = refPedidos.push().getKey();//ESTA ES LA KEY QUE VA A GENERAR
                 Pedido pedido = new Pedido(0,nombre, dni , mesa , hora , new ArrayList<Integer>());
-                refPedidos.push().setValue(pedido);
+                refPedidos.child(idFirebase).setValue(pedido);
 
                 uploadAudio(); //finish de la actividad esta en el succes de upload
 
@@ -142,13 +145,15 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
 
 
     private void uploadAudio(){
-        StorageReference filepath = mStorage.child("Audios").child(idFirebase+ ".3gp");
+        Log.d("id_firebase" , idFirebase);
+        StorageReference filepath = mStorage.child("audios").child(idFirebase+ ".3gp");
         Uri uri = Uri.fromFile(fichero);
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                setResult(RESULT_OK);
-                finish();
+                 fichero.delete();//borro siempre el audio
+                 setResult(RESULT_OK);
+                 finish();
             }
         });
     }
