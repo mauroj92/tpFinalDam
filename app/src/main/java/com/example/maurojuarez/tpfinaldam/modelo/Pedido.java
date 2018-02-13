@@ -21,10 +21,20 @@ public class Pedido implements Parcelable{
     public Pedido() {
     }
 
+    public Pedido(Integer id, String nombre, String dni, Integer mesa, String hora, List<Integer> platos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.dni = dni;
+        this.mesa = mesa;
+        this.hora = hora;
+        this.platos = platos;
+    }
+
     public Pedido(Integer id, String nombre, String dni, List<Integer> platos) {
         this.id = id;
         this.nombre = nombre;
         this.dni = dni;
+
         this.platos = platos;
     }
 
