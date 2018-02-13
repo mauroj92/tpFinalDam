@@ -9,13 +9,24 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.maurojuarez.tpfinaldam.adaptadores.AdapterPedido;
+import com.example.maurojuarez.tpfinaldam.modelo.FirebaseReferences;
 import com.example.maurojuarez.tpfinaldam.modelo.Pedido;
+import com.example.maurojuarez.tpfinaldam.modelo.Plato;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPedidos extends AppCompatActivity implements View.OnClickListener {
-    Button btnNuevoPlato;
-    ListView lvwPedidos;
+    private Button btnNuevoPlato;
+    private ListView lvwPedidos;
+    private List<Pedido> listaPedidos;
+    private AdapterPedido adapterPedido;
+    private DatabaseReference refPedidos;
 
 
     @Override
@@ -28,10 +39,30 @@ public class ListaPedidos extends AppCompatActivity implements View.OnClickListe
 
         lvwPedidos = (ListView) findViewById(R.id.lvwPedidos);
 
-        ArrayList<Pedido> pedidos = new ArrayList<>();
+        listaPedidos = new ArrayList<>();
 
-        //AdapterPedido adapterPedido = new AdapterPedido(getApplicationContext(), Array.asList());
-        //lvwPedidos.setAdapter(adapterPedido);
+        adapterPedido = new AdapterPedido(getApplicationContext(), listaPedidos);
+        lvwPedidos.setAdapter(adapterPedido);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        refPedidos = database.getReference(FirebaseReferences.PEDIDOS_REFERENCE);// busco la ref de la base de datos
+        refPedidos.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapShot: dataSnapshot.getChildren()) {
+                    Pedido unPedido = snapShot.getValue(Pedido.class);
+                    listaPedidos.add(unPedido);
+                }
+
+                adapterPedido.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

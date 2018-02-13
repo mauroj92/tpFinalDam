@@ -6,6 +6,6 @@ package com.example.maurojuarez.tpfinaldam.modelo;
 
 public class FirebaseReferences {
 
-    public static final String PLATOS_REFERENCE= "platos";
-    public static final String PLATOS_REFERENCE= "pedidos";
+    public static final String PLATOS_REFERENCE = "platos";
+    public static final String PEDIDOS_REFERENCE = "pedidos";
 }
