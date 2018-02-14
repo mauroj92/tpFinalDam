@@ -21,12 +21,13 @@ public class Plato implements Parcelable {
 
     }
 
-    public Plato(Integer id, String nombre, String detalle, Integer tipo, Double precio) {
+    public Plato(Integer id, String nombre, String detalle, Integer tipo, Double precio , Integer cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.detalle = detalle;
         this.tipo = tipo;
         this.precio = precio;
+        this.cantidad = cantidad;
     }
 
     public Plato(Parcel in){
