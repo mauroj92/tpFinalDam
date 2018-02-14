@@ -70,4 +70,7 @@ public class TabPostres extends Fragment {
 
         return view;
     }
+    public List<Plato> getListaPostres(){
+        return listaPostres;
+    }
 }

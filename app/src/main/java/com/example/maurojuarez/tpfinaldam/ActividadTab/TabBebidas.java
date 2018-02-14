@@ -72,4 +72,8 @@ public class TabBebidas extends Fragment{
 
         return view;
     }
+
+    public List<Plato> getListaBebidas(){
+        return listaBebidas;
+    }
 }

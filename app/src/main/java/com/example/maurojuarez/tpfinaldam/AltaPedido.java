@@ -20,9 +20,11 @@ import java.util.Calendar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.maurojuarez.tpfinaldam.modelo.FirebaseReferences;
 import com.example.maurojuarez.tpfinaldam.modelo.Pedido;
+import com.example.maurojuarez.tpfinaldam.modelo.Plato;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,10 +46,12 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
     private File fichero; //archivo donde va a ser guardado el audio
     private String filename = "audio_temporal.3gp";
     private Boolean grabando = false; //dependiendo el estado de esta variable, el boton graba o detiene la grabacion
+    private ArrayList<Plato> listPlatos;
 
     private StorageReference mStorage; // referencia de storage
     private DatabaseReference refPedidos;
 
+    private TextView tvDettallesPedido , tvPrecioTotal;
     private Button btnGuardar, btnCancelar , btnGrabar, btnReproducir;
     private EditText etNombre, etDni;
     private String idFirebase;
@@ -68,6 +72,8 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
         btnReproducir = (Button) findViewById(R.id.btnReproducir);
         etNombre = (EditText) findViewById(R.id.etNombre);
         etDni = (EditText) findViewById(R.id.etDni);
+        tvDettallesPedido = (TextView) findViewById(R.id.tvDetallesPedido);
+        tvPrecioTotal = (TextView) findViewById(R.id.tvPrecioTotal);
         btnGuardar.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
         btnGrabar.setOnClickListener(this);
@@ -75,11 +81,18 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
         btnReproducir.setEnabled(false);//siempre comienza en falso
 
         intentOrigen = getIntent();
-//        intentOrigen.();  ACA LEER LA LISTA DE PLATOS Y METERLA EN EL PEDIDO
+        listPlatos = intentOrigen.getParcelableArrayListExtra("platos_con_cantidad");
+        String string_detalles = "";
+        double precio_final = 0;
+        for (Plato p: listPlatos){
+            string_detalles += p.getNombre() + " x" + p.getCantidad() + "\n";
+            precio_final += (p.getCantidad() * p.getPrecio());
+
+        }
+        tvDettallesPedido.setText(string_detalles);
+        tvPrecioTotal.setText("$" + String.valueOf(precio_final));
 
         mStorage = FirebaseStorage.getInstance().getReference();
-
-
 
         // Habilitar o no audio
         File directory = getApplicationContext().getDir("audios", Context.MODE_PRIVATE);

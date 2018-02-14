@@ -77,4 +77,8 @@ public class TabPlatos extends Fragment {
 
         return view;
     }
+
+    public List<Plato> getListaPlatos(){
+        return listaPlatos;
+    }
 }

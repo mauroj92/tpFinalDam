@@ -35,6 +35,7 @@ public class Plato implements Parcelable {
         detalle = in.readString();
         tipo = in.readInt();
         precio = in.readDouble();
+        cantidad = in.readInt();
     }
 
     public static final Creator<Plato> CREATOR = new Creator<Plato>() {
@@ -61,6 +62,7 @@ public class Plato implements Parcelable {
         parcel.writeString(detalle);
         parcel.writeInt(tipo);
         parcel.writeDouble(precio);
+        parcel.writeInt(cantidad);
 
     }
 
@@ -72,6 +74,7 @@ public class Plato implements Parcelable {
                 ", detalle='" + detalle + '\'' +
                 ", tipo=" + tipo +
                 ", precio=" + precio +
+                ", cantidad=" + cantidad +
                 '}';
     }
 
