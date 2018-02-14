@@ -3,10 +3,12 @@ package com.example.maurojuarez.tpfinaldam;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.maurojuarez.tpfinaldam.adaptadores.AdapterPedido;
 import com.example.maurojuarez.tpfinaldam.modelo.FirebaseReferences;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaPedidos extends AppCompatActivity implements View.OnClickListener {
+    final static int REQUEST_ALTA_PLATO = 1;
     private Button btnNuevoPlato;
     private ListView lvwPedidos;
     private List<Pedido> listaPedidos;
@@ -71,8 +74,23 @@ public class ListaPedidos extends AppCompatActivity implements View.OnClickListe
             case R.id.btnNuevoPlato:
                 //Ir a la actividade de alta de plato
                 Intent intentPlato = new Intent(this, AltaPlatos.class);
-                startActivity(intentPlato);
+                startActivityForResult(intentPlato, REQUEST_ALTA_PLATO);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_ALTA_PLATO){
+            switch (resultCode) {
+                case RESULT_CANCELED:
+
+                    break;
+                case RESULT_OK:
+                    Toast.makeText(ListaPedidos.this, "El plato fue creado exitosamente", Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
     }
 }

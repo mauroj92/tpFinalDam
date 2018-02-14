@@ -65,17 +65,23 @@ public class ListaPlatosTabs extends AppCompatActivity {
                     }
                 }
                 List<Plato> postres = tabPostres.getListaPostres();
-                for (Plato p: postres){
-                    if(p.getCantidad() > 0){
-                        conCantidad.add(p);
+                if(postres != null){
+                    for (Plato p: postres){
+                        if(p.getCantidad() > 0){
+                            conCantidad.add(p);
+                        }
                     }
                 }
+
                 List<Plato> bebidas = tabBebidas.getListaBebidas();
-                for (Plato p: bebidas){
-                    if(p.getCantidad() > 0){
-                        conCantidad.add(p);
+                if(bebidas != null){
+                    for (Plato p: bebidas){
+                        if(p.getCantidad() > 0){
+                            conCantidad.add(p);
+                        }
                     }
                 }
+
 
                 Intent intent = new Intent(ListaPlatosTabs.this, AltaPedido.class);
                 intent.putExtra("platos_con_cantidad" , conCantidad);

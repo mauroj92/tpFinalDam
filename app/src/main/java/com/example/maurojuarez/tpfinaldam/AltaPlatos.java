@@ -1,5 +1,6 @@
 package com.example.maurojuarez.tpfinaldam;
 
+import android.content.Intent;
 import android.icu.util.ULocale;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,10 +30,13 @@ public class AltaPlatos extends AppCompatActivity implements View.OnClickListene
     private EditText etDescripcion;
     private String bandera = "CREAR";
     private DatabaseReference refPlatos;
+    private Intent intentOrigen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alta_plato_layout);
+
+        intentOrigen = getIntent();
 
         //seteo variables de la vista
         etPrecio = (EditText) findViewById(R.id.etPrecio);
@@ -64,13 +68,18 @@ public class AltaPlatos extends AppCompatActivity implements View.OnClickListene
                     String detalle = etDescripcion.getText().toString();
                     Double precio = Double.valueOf(etPrecio.getText().toString());
                     TipoPlato tipo  = (TipoPlato) spTipo.getSelectedItem();
-                    Plato nuevo_plato = new Plato(id,nombre,detalle, tipo.getId(),precio);
+                    Integer cantidad = 0;
+                    Plato nuevo_plato = new Plato(id,nombre,detalle, tipo.getId(),precio,cantidad);
                     refPlatos.push().setValue(nuevo_plato);
+                    setResult(RESULT_OK , intentOrigen);
+                    finish();
                 }else{//modificando
 
                 }
             break;
             case R.id.btnCancelar:
+                setResult(RESULT_CANCELED , intentOrigen);
+                finish();
             break;
         }
     }
