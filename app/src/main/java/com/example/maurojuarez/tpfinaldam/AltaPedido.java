@@ -20,9 +20,11 @@ import java.util.Calendar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.maurojuarez.tpfinaldam.modelo.FirebaseReferences;
 import com.example.maurojuarez.tpfinaldam.modelo.Pedido;
+import com.example.maurojuarez.tpfinaldam.modelo.Plato;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,15 +46,20 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
     private File fichero; //archivo donde va a ser guardado el audio
     private String filename = "audio_temporal.3gp";
     private Boolean grabando = false; //dependiendo el estado de esta variable, el boton graba o detiene la grabacion
+    private Boolean grabado = false;
+    private ArrayList<Plato> listPlatos;
+    private ArrayList<Integer> listaEnteros;
 
     private StorageReference mStorage; // referencia de storage
     private DatabaseReference refPedidos;
 
+    private TextView tvDettallesPedido , tvPrecioTotal;
     private Button btnGuardar, btnCancelar , btnGrabar, btnReproducir;
     private EditText etNombre, etDni;
     private String idFirebase;
 
     private Intent intentOrigen;
+
     Calendar calendar = Calendar.getInstance(Locale.getDefault());
 
     @Override
@@ -74,16 +81,28 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
 
         etNombre = (EditText) findViewById(R.id.etNombre);
         etDni = (EditText) findViewById(R.id.etDni);
+        tvDettallesPedido = (TextView) findViewById(R.id.tvDetallesPedido);
+        tvPrecioTotal = (TextView) findViewById(R.id.tvPrecioTotal);
+        btnGuardar.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
         btnGrabar.setOnClickListener(this);
         btnReproducir.setOnClickListener(this);
         btnReproducir.setEnabled(false);//siempre comienza en falso
 
         intentOrigen = getIntent();
-//        intentOrigen.removeExtra();  ACA LEER LA LISTA DE PLATOS Y METERLA EN EL PEDIDO
+        listPlatos = intentOrigen.getParcelableArrayListExtra("platos_con_cantidad");
+        String string_detalles = "";
+        double precio_final = 0;
+        listaEnteros = new ArrayList<>();
+        for (Plato p: listPlatos){
+            string_detalles += p.getNombre() + " x" + p.getCantidad() + "\n";
+            precio_final += (p.getCantidad() * p.getPrecio());
+            listaEnteros.add(p.getId());
+        }
+        tvDettallesPedido.setText(string_detalles);
+        tvPrecioTotal.setText("$" + String.valueOf(precio_final));
 
         mStorage = FirebaseStorage.getInstance().getReference();
-
-
 
         // Habilitar o no audio
         File directory = getApplicationContext().getDir("audios", Context.MODE_PRIVATE);
@@ -122,7 +141,7 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.btnGuardar:
-                fichero.delete();//borro siempre el audio
+
 
                 Date currentTime = Calendar.getInstance().getTime();
                 int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -134,10 +153,17 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
                 String dni = etDni.getText().toString();
                 Integer mesa = 10;
                 idFirebase = refPedidos.push().getKey();//ESTA ES LA KEY QUE VA A GENERAR
-                Pedido pedido = new Pedido(0,nombre, dni , mesa , hora , new ArrayList<Integer>());
-                refPedidos.push().setValue(pedido);
+                Pedido pedido = new Pedido(0,nombre, dni , mesa , hora , listaEnteros);
+                refPedidos.child(idFirebase).setValue(pedido);
+                if(grabado){
+                    uploadAudio(); //finish de la actividad esta en el succes de upload
+                }
+                fichero.delete();//borro siempre el audio
 
-                uploadAudio(); //finish de la actividad esta en el succes de upload
+                //setResult(RESULT_OK);
+                //finish();
+                Intent intentExito =  new Intent(getApplicationContext(), ExitoPedido.class);
+                startActivity(intentExito);
 
                 break;
             case R.id.btnReproducir:
@@ -149,13 +175,12 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
 
 
     private void uploadAudio(){
-        StorageReference filepath = mStorage.child("Audios").child(idFirebase+ ".3gp");
+        Log.d("id_firebase" , idFirebase);
+        StorageReference filepath = mStorage.child("audios").child(idFirebase+ ".3gp");
         Uri uri = Uri.fromFile(fichero);
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //setResult(RESULT_OK);
-                //finish();
                 Intent intentExito =  new Intent(getApplicationContext(), ExitoPedido.class);
                 startActivity(intentExito);
             }
@@ -181,6 +206,7 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
 
     private void pararAudio(){
         grabando= false;
+        grabado = true;//tengo un archivo para guardar en la nueve
         btnGrabar.setText("GRABAR AUDIO");
         recorder.stop();
         recorder.release();

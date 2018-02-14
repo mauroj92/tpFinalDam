@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.maurojuarez.tpfinaldam.AltaPedido">
+    tools:context="com.example.maurojuarez.tpfinaldam.AltaPedido"
+    android:weightSum="1">
     <TextView
         android:text="CONFIRMACION DE PEDIDO"
         android:id="@+id/tvTitulo"
@@ -35,7 +36,8 @@
     <EditText
         android:id="@+id/etDni"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
 
 
     <TextView
@@ -83,5 +85,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvTituloDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:text="DETTALLES DEL PEDIDO: "
+        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tvPrecioTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDetallesPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

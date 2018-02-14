@@ -5,16 +5,54 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context="com.example.maurojuarez.tpfinaldam.ExitoPedido">
 
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:src="@drawable/logo_principal"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
     <TextView
+        android:layout_marginTop="30dp"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:textStyle="italic"
         android:text="Tu pedido se realizó con éxito!"
         android:textSize="23dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <TextView
-        android:id="@+id/tvwCronometro"
-        android:textSize="50dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:text="¡SOLO ESPERÁ!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginLeft="45dp"
+            android:src="@drawable/relojito"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:text="12:12:12"
+            android:textColor="#000"
+            android:id="@+id/tvwCronometro"
+            android:textSize="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 </LinearLayout>

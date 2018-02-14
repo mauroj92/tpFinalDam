@@ -1,5 +1,7 @@
 package com.example.maurojuarez.tpfinaldam.ActividadTab;
 
+import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,10 +22,18 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.example.maurojuarez.tpfinaldam.AltaPedido;
 import com.example.maurojuarez.tpfinaldam.R;
+import com.example.maurojuarez.tpfinaldam.modelo.Plato;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPlatosTabs extends AppCompatActivity {
-
+    private static final int REQUEST_ALTA_PEDIDO= 1;
+    private TabPlatos tabp;
+    private TabPostres tabPostres;
+    private TabBebidas tabBebidas;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
@@ -46,8 +57,29 @@ public class ListaPlatosTabs extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                ArrayList<Plato> conCantidad = new ArrayList<>();
+                List<Plato> platos = tabp.getListaPlatos();
+                for (Plato p: platos){
+                    if(p.getCantidad() > 0){
+                        conCantidad.add(p);
+                    }
+                }
+                List<Plato> postres = tabPostres.getListaPostres();
+                for (Plato p: postres){
+                    if(p.getCantidad() > 0){
+                        conCantidad.add(p);
+                    }
+                }
+                List<Plato> bebidas = tabBebidas.getListaBebidas();
+                for (Plato p: bebidas){
+                    if(p.getCantidad() > 0){
+                        conCantidad.add(p);
+                    }
+                }
+
+                Intent intent = new Intent(ListaPlatosTabs.this, AltaPedido.class);
+                intent.putExtra("platos_con_cantidad" , conCantidad);
+                startActivityForResult(intent, REQUEST_ALTA_PEDIDO);
             }
         });
 
@@ -55,9 +87,12 @@ public class ListaPlatosTabs extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager){
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TabPlatos() ,"Platos");
-        adapter.addFragment(new TabBebidas() , "Bebidas");
-        adapter.addFragment(new TabPostres() , "Postres");
+        tabp = new TabPlatos();
+        adapter.addFragment(tabp ,"Platos");
+        tabBebidas = new TabBebidas();
+        adapter.addFragment(tabBebidas , "Bebidas");
+        tabPostres = new TabPostres();
+        adapter.addFragment(tabPostres , "Postres");
         viewPager.setAdapter(adapter);
     }
 

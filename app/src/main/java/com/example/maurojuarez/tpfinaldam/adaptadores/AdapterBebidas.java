@@ -47,38 +47,48 @@ public class AdapterBebidas extends ArrayAdapter<Plato> {
 
             row.setTag(holder);
 
+            Button.OnClickListener onClickListener_mas = new Button.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    //Obtiene la posición donde se clikeó el botón
+                    Integer posicionClick = (Integer) view.getTag(R.integer.posicion_plato);
+                    //Se aumenta en 1 la cantidad
+                    Integer cantidad = (Integer) view.getTag(R.integer.cantidad_plato) + 1;
+                    getItem(posicionClick).setCantidad(cantidad);
+                    notifyDataSetChanged();
+                }
+            };
+
+            Button.OnClickListener onClickListener_menos = new Button.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    //Obtiene la posición donde se clikeó el botón
+                    Integer posicionClick = (Integer) view.getTag(R.integer.posicion_plato);
+                    //Se resta en 1 la cantidad
+                    Integer cantidad = (Integer) view.getTag(R.integer.cantidad_plato);
+                    if (cantidad > 0) {
+                        getItem(posicionClick).setCantidad(cantidad - 1);
+                        notifyDataSetChanged();
+                    }
+
+                }
+            };
+
+            holder.btnMenos.setOnClickListener(onClickListener_menos);
+            holder.btnMas.setOnClickListener(onClickListener_mas);
         }
 
 
-
+        Integer cantidad = this.getItem(position).getCantidad();
         holder.nombre.setText(this.getItem(position).getNombre());
-        holder.cantidad.setText(holder.cantidad.getText().toString());
+        holder.cantidad.setText(String.valueOf(cantidad));
         holder.precio.setText("$: " + this.getItem(position).getPrecio().toString());
         holder.detalles.setText(this.getItem(position).getDetalle());
 
-        final View.OnClickListener onClickListener_mas = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String string =  finalHolder.cantidad.getText().toString();
-                String[] parts = string.split(":");
-                Integer cantidad = Integer.valueOf(parts[1]);
-                cantidad++;
-                finalHolder.cantidad.setText("Cantidad: " + String.valueOf(cantidad));
-            }
-        };
-
-        final View.OnClickListener onClickListener_menos = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String string = finalHolder.cantidad.getText().toString();
-                String[] parts = string.split(":");
-                Integer cantidad = Integer.valueOf(parts[1]);
-                cantidad--;
-                finalHolder.cantidad.setText("Cantidad: " + String.valueOf(cantidad));
-            }
-        };
-        holder.btnMenos.setOnClickListener(onClickListener_menos);
-        holder.btnMas.setOnClickListener(onClickListener_mas);
+        holder.btnMas.setTag(R.integer.posicion_plato,position);
+        holder.btnMas.setTag(R.integer.cantidad_plato,cantidad);
+        holder.btnMenos.setTag(R.integer.posicion_plato,position);
+        holder.btnMenos.setTag(R.integer.cantidad_plato,cantidad);
 
         return row ;
     }
