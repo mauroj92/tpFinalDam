@@ -46,7 +46,9 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
     private File fichero; //archivo donde va a ser guardado el audio
     private String filename = "audio_temporal.3gp";
     private Boolean grabando = false; //dependiendo el estado de esta variable, el boton graba o detiene la grabacion
+    private Boolean grabado = false;
     private ArrayList<Plato> listPlatos;
+    private ArrayList<Integer> listaEnteros;
 
     private StorageReference mStorage; // referencia de storage
     private DatabaseReference refPedidos;
@@ -84,10 +86,11 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
         listPlatos = intentOrigen.getParcelableArrayListExtra("platos_con_cantidad");
         String string_detalles = "";
         double precio_final = 0;
+        listaEnteros = new ArrayList<>();
         for (Plato p: listPlatos){
             string_detalles += p.getNombre() + " x" + p.getCantidad() + "\n";
             precio_final += (p.getCantidad() * p.getPrecio());
-
+            listaEnteros.add(p.getId());
         }
         tvDettallesPedido.setText(string_detalles);
         tvPrecioTotal.setText("$" + String.valueOf(precio_final));
@@ -143,10 +146,14 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
                 String dni = etDni.getText().toString();
                 Integer mesa = 10;
                 idFirebase = refPedidos.push().getKey();//ESTA ES LA KEY QUE VA A GENERAR
-                Pedido pedido = new Pedido(0,nombre, dni , mesa , hora , new ArrayList<Integer>());
+                Pedido pedido = new Pedido(0,nombre, dni , mesa , hora , listaEnteros);
                 refPedidos.child(idFirebase).setValue(pedido);
-
-                uploadAudio(); //finish de la actividad esta en el succes de upload
+                if(grabado){
+                    uploadAudio(); //finish de la actividad esta en el succes de upload
+                }
+                fichero.delete();//borro siempre el audio
+                setResult(RESULT_OK);
+                finish();
 
                 break;
             case R.id.btnReproducir:
@@ -164,9 +171,8 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                 fichero.delete();//borro siempre el audio
-                 setResult(RESULT_OK);
-                 finish();
+
+
             }
         });
     }
@@ -190,6 +196,7 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
 
     private void pararAudio(){
         grabando= false;
+        grabado = true;//tengo un archivo para guardar en la nueve
         btnGrabar.setText("GRABAR AUDIO");
         recorder.stop();
         recorder.release();
