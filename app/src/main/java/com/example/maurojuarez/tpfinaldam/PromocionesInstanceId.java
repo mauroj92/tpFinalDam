@@ -1,29 +1,31 @@
 package com.example.maurojuarez.tpfinaldam;
 
 import android.util.Log;
-
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-/**
- * Created by Mauro Juarez on 13 feb 2018.
- */
-
 public class PromocionesInstanceId extends FirebaseInstanceIdService {
-    public static final String TAG_TOKEN = "Token";
-    public PromocionesInstanceId() {}
+    private static final String TAG = "FirebaseIDService";
 
     @Override
-    public  void onTokenRefresh(){
-        // obtiene el token que lo identifica
+    public void onTokenRefresh() {
+        // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG_TOKEN, "Refreshed token"+refreshedToken);
-        guardarToken(refreshedToken);
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+
+        // TODO: Implement this method to send any registration to your app's servers.
+        //sendRegistrationToServer(refreshedToken);
     }
 
-    private void guardarToken(String tkn) {
-        //guardarlo en un archivo
-        // o en el servidor con un POST asociando un
-        // nombre de usuario ficticio y hardcoded
+    /**
+     * Persist token to third-party servers.
+     *
+     * Modify this method to associate the user's FCM InstanceID token with any server-side account
+     * maintained by your application.
+     *
+     * @param token The new token.
+     */
+    private void sendRegistrationToServer(String token) {
+        // Add custom implementation, as needed.
     }
 }

@@ -65,6 +65,13 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
         btnGuardar = (Button) findViewById(R.id.btnGuardar);
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnReproducir = (Button) findViewById(R.id.btnReproducir);
+
+        btnGrabar.setOnClickListener(this);
+        btnGuardar.setOnClickListener(this);
+        btnCancelar.setOnClickListener(this);
+        btnReproducir.setOnClickListener(this);
+
+
         etNombre = (EditText) findViewById(R.id.etNombre);
         etDni = (EditText) findViewById(R.id.etDni);
         btnGrabar.setOnClickListener(this);
@@ -148,7 +155,7 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 setResult(RESULT_OK);
-                finish();
+                //finish();
             }
         });
     }

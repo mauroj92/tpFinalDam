@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.maurojuarez.tpfinaldam">
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,31 +20,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AltaPlatos" />
+        <activity android:name=".AltaPedido" />
         <activity android:name=".ListaPedidos" />
         <activity
             android:name=".ActividadTab.ListaPlatosTabs"
             android:label="@string/title_activity_lista_platos_tabs"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AltaPedido"></activity>
+        <activity android:name=".AltaPlatos" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
-        <service
-            android:name=".PromocionesInstanceId"
-            android:enabled="true"
-            android:exported="true">
+        <service android:name=".PromocionesService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".PromocionesService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+
+        <activity android:name=".ExitoPedido"></activity>
     </application>
 
 </manifest>
