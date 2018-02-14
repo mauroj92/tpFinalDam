@@ -154,8 +154,10 @@ public class AltaPedido extends AppCompatActivity implements View.OnClickListene
         filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                setResult(RESULT_OK);
+                //setResult(RESULT_OK);
                 //finish();
+                Intent intentExito =  new Intent(getApplicationContext(), ExitoPedido.class);
+                startActivity(intentExito);
             }
         });
     }
