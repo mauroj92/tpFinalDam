@@ -10,17 +10,26 @@
         android:text="Nombre y Apellido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <TextView
-        android:textColor="#000"
-        android:id="@+id/txvMesaPedido"
-        android:text="MESA 4"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:textColor="#000"
-        android:id="@+id/txvHoraPedido"
-        android:text="HORA"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp">
+        <TextView
+            android:textColor="#ea0"
+            android:id="@+id/tvMesa"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="Mesa 12" />
+        <TextView
+            android:textColor="#8c2"
+            android:id="@+id/tvHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:15:20"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
 
 </LinearLayout>

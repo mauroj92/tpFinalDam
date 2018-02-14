@@ -34,7 +34,6 @@ public class Pedido implements Parcelable{
         this.id = id;
         this.nombre = nombre;
         this.dni = dni;
-
         this.platos = platos;
     }
 
@@ -42,6 +41,8 @@ public class Pedido implements Parcelable{
         id = in.readInt();
         nombre = in.readString();
         dni = in.readString();
+        mesa = in.readInt();
+        hora = in.readString();
         in.readList(platos,null);
     }
 
@@ -50,6 +51,8 @@ public class Pedido implements Parcelable{
         parcel.writeInt(id);
         parcel.writeString(nombre);
         parcel.writeString(dni);
+        parcel.writeInt(mesa);
+        parcel.writeString(hora);
         parcel.writeList(platos);
     }
 

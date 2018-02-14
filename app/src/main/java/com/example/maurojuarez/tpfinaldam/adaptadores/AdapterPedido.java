@@ -47,7 +47,7 @@ public class AdapterPedido extends ArrayAdapter<Pedido> {
         }
 
         holder.nombre.setText(this.getItem(position).getNombre());
-        holder.mesa.setText(this.getItem(position).getMesa().toString());
+        holder.mesa.setText("Mesa: " + this.getItem(position).getMesa().toString());
         holder.hora.setText(this.getItem(position).getHora());
 
         return row ;
@@ -60,8 +60,8 @@ public class AdapterPedido extends ArrayAdapter<Pedido> {
 
         public ViewHolder(View base) {
             this.nombre = (TextView) base.findViewById(R.id.txvNombrePedido);
-            this.mesa = (TextView) base.findViewById(R.id.txvMesaPedido);
-            this.hora = (TextView) base.findViewById(R.id.txvHoraPedido);
+            this.mesa = (TextView) base.findViewById(R.id.tvMesa);
+            this.hora = (TextView) base.findViewById(R.id.tvHora);
         }
     }
 }
